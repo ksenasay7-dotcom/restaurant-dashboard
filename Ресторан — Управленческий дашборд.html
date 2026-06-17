@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)file:///C:/Users/HP/Downloads/restaurant_dashboard%20(3).html -->
+<html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ресторан — Управленческий дашборд</title>
+<script src="./Ресторан — Управленческий дашборд_files/chart.umd.js.Без названия"></script>
+<style>
+  :root { --olive:#6B705C;--olive-dark:#4A5240;--olive-mid:#8A9478;--olive-light:#EFF3EA;--cream:#F7F5F0;--blush:#F5EDE5;--sage:#C8BFA0;--white:#FFFFFF;--dark:#2B2B2B;--grey:#888780;--grey-light:#D8D5CE;--green:#4A6741;--red:#B05050;--border:rgba(107,112,92,0.15); }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:Arial,sans-serif;background:var(--cream);color:var(--dark);font-size:13px;}
+  .header{background:var(--olive-dark);padding:18px 32px;display:flex;justify-content:space-between;align-items:center;}
+  .header h1{color:white;font-size:16px;font-weight:700;letter-spacing:.04em;}
+  .header-sub{color:rgba(255,255,255,.6);font-size:12px;}
+  .container{padding:24px 32px;max-width:1400px;margin:0 auto;}
+  .section-title{font-size:11px;font-weight:700;color:var(--olive);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;padding-bottom:6px;border-bottom:1.5px solid var(--olive-light);}
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px;}
+  .kpi-card{background:var(--white);border-radius:10px;border:0.5px solid var(--border);padding:16px 20px;transition:transform .15s,box-shadow .15s;cursor:default;}
+  .kpi-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(107,112,92,.12);}
+  .kpi-label{font-size:11px;color:var(--grey);margin-bottom:6px;}
+  .kpi-value{font-size:22px;font-weight:700;color:var(--olive-dark);line-height:1.1;}
+  .kpi-unit{font-size:12px;color:var(--grey);margin-left:3px;}
+  .kpi-delta{font-size:11px;margin-top:5px;}
+  .delta-up{color:var(--green);}
+  .delta-down{color:var(--red);}
+  .charts-row{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:28px;}
+  .charts-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:28px;}
+  .card{background:var(--white);border-radius:10px;border:0.5px solid var(--border);padding:18px 20px;}
+  .card-title{font-size:13px;font-weight:600;color:var(--dark);margin-bottom:14px;}
+  .chart-wrap{position:relative;}
+  .week-table{width:100%;border-collapse:collapse;font-size:12px;}
+  .week-table th{background:var(--olive-dark);color:white;padding:7px 10px;text-align:center;font-weight:600;font-size:11px;}
+  .week-table td{padding:7px 10px;text-align:center;border-bottom:0.5px solid var(--olive-light);}
+  .week-table tr:hover td{background:var(--cream);}
+  .week-high{color:var(--green);font-weight:600;}
+  .week-low{color:var(--red);}
+  .bar-row{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
+  .bar-name{font-size:12px;color:var(--dark);width:120px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .bar-track{flex:1;height:7px;background:var(--olive-light);border-radius:4px;overflow:hidden;}
+  .bar-fill{height:100%;border-radius:4px;transition:width .6s cubic-bezier(.4,0,.2,1);}
+  .bar-pct{font-size:11px;color:var(--grey);width:38px;text-align:right;flex-shrink:0;font-weight:600;}
+  .zone-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}
+  .zone-card{background:var(--cream);border:1px solid var(--grey-light);border-radius:8px;padding:12px 10px;text-align:center;transition:all .15s;cursor:default;}
+  .zone-card:hover{background:var(--white);border-color:var(--olive);transform:translateY(-2px);}
+  .zone-name{font-size:11px;color:var(--grey);margin-bottom:5px;}
+  .zone-val{font-size:13px;font-weight:700;color:var(--olive-dark);}
+  .zone-pct{font-size:11px;color:var(--olive-mid);margin-top:3px;}
+  .tab-btns{display:flex;gap:6px;margin-bottom:12px;}
+  .tab-btn{padding:5px 12px;border-radius:6px;font-size:12px;cursor:pointer;border:0.5px solid var(--grey-light);background:var(--white);color:var(--grey);transition:all .15s;}
+  .tab-btn.active{background:var(--olive);color:white;border-color:var(--olive);}
+  .tab-btn:hover:not(.active){background:var(--olive-light);}
+  .footer{text-align:center;padding:20px;font-size:11px;color:var(--grey);border-top:0.5px solid var(--grey-light);margin-top:16px;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>УПРАВЛЕНЧЕСКИЙ ДАШБОРД — РЕСТОРАН</h1>
+    <div class="header-sub">Май 2026 · Данные обновлены</div>
+  </div>
+  <div style="text-align:right">
+    <div style="color:rgba(255,255,255,.9);font-size:14px;font-weight:700">1 561 963 200 сум</div>
+    <div style="color:rgba(255,255,255,.6);font-size:11px">Выручка за месяц · <span style="color:#9FE1CB">+5.8% к апрелю</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="section-title">Ключевые показатели</div>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Выручка за месяц</div>
+      <div class="kpi-value">1 561 963<span class="kpi-unit">тыс. сум</span></div>
+      <div class="kpi-delta delta-up">↑ +5.8% к апрелю</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Количество чеков</div>
+      <div class="kpi-value">4 533</div>
+      <div class="kpi-delta delta-up">↑ +3.2% к апрелю</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Средний чек</div>
+      <div class="kpi-value">344 576<span class="kpi-unit">сум</span></div>
+      <div class="kpi-delta delta-up">↑ +2.5% к апрелю</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Бар / Кухня</div>
+      <div class="kpi-value">26% <span style="font-size:14px;color:var(--sage)">/ 74%</span></div>
+      <div class="kpi-delta" style="color:var(--grey)">404M бар · 1 128M кухня</div>
+    </div>
+  </div>
+
+  <div class="charts-row">
+    <div class="card">
+      <div class="card-title">Выручка по дням — май 2026</div>
+      <div class="chart-wrap" style="height:200px"><canvas id="lineChart" role="img" aria-label="Динамика выручки по дням мая 2026" width="1152" height="275" style="display: block; box-sizing: border-box; height: 200px; width: 838px;"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Бар vs Кухня</div>
+      <div style="display:flex;align-items:center;gap:16px;height:200px">
+        <div class="chart-wrap" style="height:160px;width:160px;flex-shrink:0"><canvas id="donutChart" role="img" aria-label="Бар vs Кухня" width="200" height="200" style="display: block; box-sizing: border-box; height: 160px; width: 160px;"></canvas></div>
+        <div>
+          <div style="margin-bottom:12px">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><span style="width:10px;height:10px;border-radius:2px;background:var(--olive-dark);display:inline-block"></span><span style="font-size:12px;color:var(--grey)">Бар</span></div>
+            <div style="font-size:18px;font-weight:700;color:var(--olive-dark)">404M</div>
+            <div style="font-size:12px;color:var(--olive-mid)">26% от выручки</div>
+          </div>
+          <div>
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><span style="width:10px;height:10px;border-radius:2px;background:var(--sage);display:inline-block"></span><span style="font-size:12px;color:var(--grey)">Кухня</span></div>
+            <div style="font-size:18px;font-weight:700;color:var(--olive-dark)">1 128M</div>
+            <div style="font-size:12px;color:var(--olive-mid)">74% от выручки</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Сравнительный недельный итог</div>
+  <div class="card" style="margin-bottom:28px;overflow-x:auto">
+    <table class="week-table">
+      <thead>
+        <tr>
+          <th>Показатель</th>
+          <th>Понедельник</th>
+          <th>Вторник</th>
+          <th>Среда</th>
+          <th>Четверг</th>
+          <th>Пятница</th>
+          <th>Суббота</th>
+          <th>Воскресенье</th>
+          <th>Итого</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:600;color:var(--olive-dark);text-align:left">Общий</td>
+          <td>181 153 050</td>
+          <td>179 307 600</td>
+          <td>211 906 300</td>
+          <td>191 048 250</td>
+          <td class="week-high">244 133 900</td>
+          <td class="week-high">278 232 950</td>
+          <td class="week-high">276 181 150</td>
+          <td style="font-weight:700;color:var(--olive-dark)">1 561 963 200</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:var(--olive-dark);text-align:left">Общий %</td>
+          <td class="week-low">11.6%</td>
+          <td class="week-low">11.5%</td>
+          <td>13.6%</td>
+          <td>12.2%</td>
+          <td>15.6%</td>
+          <td class="week-high">17.8%</td>
+          <td class="week-high">17.7%</td>
+          <td style="font-weight:700">100%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="charts-row">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div class="card-title" style="margin:0">Топ категорий</div>
+        <div class="tab-btns">
+          <button class="tab-btn active" onclick="showCat(&#39;bar&#39;,this)">Бар</button>
+          <button class="tab-btn" onclick="showCat(&#39;kuh&#39;,this)">Кухня</button>
+        </div>
+      </div>
+      <div id="catList"><div class="bar-row"><div class="bar-name" title="Кофе">Кофе</div><div class="bar-track"><div class="bar-fill" style="width:100%;background:#6B705C"></div></div><div class="bar-pct">36.7%</div></div><div class="bar-row"><div class="bar-name" title="Лимонад">Лимонад</div><div class="bar-track"><div class="bar-fill" style="width:58%;background:#6B705C"></div></div><div class="bar-pct">21.3%</div></div><div class="bar-row"><div class="bar-name" title="Чай">Чай</div><div class="bar-track"><div class="bar-fill" style="width:34%;background:#6B705C"></div></div><div class="bar-pct">12.6%</div></div><div class="bar-row"><div class="bar-name" title="Фреш">Фреш</div><div class="bar-track"><div class="bar-fill" style="width:28%;background:#6B705C"></div></div><div class="bar-pct">10.1%</div></div><div class="bar-row"><div class="bar-name" title="Напитки">Напитки</div><div class="bar-track"><div class="bar-fill" style="width:14%;background:#6B705C"></div></div><div class="bar-pct">5.1%</div></div><div class="bar-row"><div class="bar-name" title="Айс кофе">Айс кофе</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#6B705C"></div></div><div class="bar-pct">3.6%</div></div><div class="bar-row"><div class="bar-name" title="доппио">доппио</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#6B705C"></div></div><div class="bar-pct">3.6%</div></div><div class="bar-row"><div class="bar-name" title="Витамин чай">Витамин чай</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#6B705C"></div></div><div class="bar-pct">2.4%</div></div><div class="bar-row"><div class="bar-name" title="Матча">Матча</div><div class="bar-track"><div class="bar-fill" style="width:6%;background:#6B705C"></div></div><div class="bar-pct">2.1%</div></div><div class="bar-row"><div class="bar-name" title="Смузи детокс">Смузи детокс</div><div class="bar-track"><div class="bar-fill" style="width:4%;background:#6B705C"></div></div><div class="bar-pct">1.4%</div></div><div class="bar-row"><div class="bar-name" title="For kids">For kids</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#6B705C"></div></div><div class="bar-pct">0.8%</div></div><div class="bar-row"><div class="bar-name" title="Китайский чай">Китайский чай</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#6B705C"></div></div><div class="bar-pct">0.2%</div></div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Выручка по дням недели</div>
+      <div class="chart-wrap" style="height:220px"><canvas id="weekChart" role="img" aria-label="Выручка по дням недели" width="547" height="302" style="display: block; box-sizing: border-box; height: 220px; width: 398px;"></canvas></div>
+    </div>
+  </div>
+
+  <div class="section-title">Продажи по зонам</div>
+  <div class="zone-grid" style="margin-bottom:28px">
+    <div class="zone-card"><div class="zone-name">Зал</div><div class="zone-val">310 632 400</div><div class="zone-pct">19.9% · 730 чеков</div></div>
+    <div class="zone-card"><div class="zone-name">Летка</div><div class="zone-val">1 153 884 200</div><div class="zone-pct">73.9% · 3 028 чеков</div></div>
+    <div class="zone-card"><div class="zone-name">С собой</div><div class="zone-val">54 305 900</div><div class="zone-pct">3.5% · 551 чек</div></div>
+    <div class="zone-card"><div class="zone-name">VIP-зал</div><div class="zone-val">30 333 300</div><div class="zone-pct">1.9% · 147 чеков</div></div>
+    <div class="zone-card"><div class="zone-name">Балкон</div><div class="zone-val">12 807 400</div><div class="zone-pct">0.8% · 77 чеков</div></div>
+  </div>
+
+  <div class="section-title">Структура выручки — Бар и Кухня</div>
+  <div class="charts-row-3">
+    <div class="card">
+      <div class="card-title">Бар — категории</div>
+      <div id="barList"><div class="bar-row"><div class="bar-name" title="Кофе">Кофе</div><div class="bar-track"><div class="bar-fill" style="width:100%;background:#6B705C"></div></div><div class="bar-pct">36.7%</div></div><div class="bar-row"><div class="bar-name" title="Лимонад">Лимонад</div><div class="bar-track"><div class="bar-fill" style="width:58%;background:#6B705C"></div></div><div class="bar-pct">21.3%</div></div><div class="bar-row"><div class="bar-name" title="Чай">Чай</div><div class="bar-track"><div class="bar-fill" style="width:34%;background:#6B705C"></div></div><div class="bar-pct">12.6%</div></div><div class="bar-row"><div class="bar-name" title="Фреш">Фреш</div><div class="bar-track"><div class="bar-fill" style="width:28%;background:#6B705C"></div></div><div class="bar-pct">10.1%</div></div><div class="bar-row"><div class="bar-name" title="Напитки">Напитки</div><div class="bar-track"><div class="bar-fill" style="width:14%;background:#6B705C"></div></div><div class="bar-pct">5.1%</div></div><div class="bar-row"><div class="bar-name" title="Айс кофе">Айс кофе</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#6B705C"></div></div><div class="bar-pct">3.6%</div></div><div class="bar-row"><div class="bar-name" title="доппио">доппио</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#6B705C"></div></div><div class="bar-pct">3.6%</div></div><div class="bar-row"><div class="bar-name" title="Витамин чай">Витамин чай</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#6B705C"></div></div><div class="bar-pct">2.4%</div></div><div class="bar-row"><div class="bar-name" title="Матча">Матча</div><div class="bar-track"><div class="bar-fill" style="width:6%;background:#6B705C"></div></div><div class="bar-pct">2.1%</div></div><div class="bar-row"><div class="bar-name" title="Смузи детокс">Смузи детокс</div><div class="bar-track"><div class="bar-fill" style="width:4%;background:#6B705C"></div></div><div class="bar-pct">1.4%</div></div><div class="bar-row"><div class="bar-name" title="For kids">For kids</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#6B705C"></div></div><div class="bar-pct">0.8%</div></div><div class="bar-row"><div class="bar-name" title="Китайский чай">Китайский чай</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#6B705C"></div></div><div class="bar-pct">0.2%</div></div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Кухня — категории</div>
+      <div id="kuhList"><div class="bar-row"><div class="bar-name" title="Основные блюда">Основные блюда</div><div class="bar-track"><div class="bar-fill" style="width:100%;background:#A0A87A"></div></div><div class="bar-pct">34.7%</div></div><div class="bar-row"><div class="bar-name" title="Завтраки">Завтраки</div><div class="bar-track"><div class="bar-fill" style="width:90%;background:#A0A87A"></div></div><div class="bar-pct">31.1%</div></div><div class="bar-row"><div class="bar-name" title="Салаты">Салаты</div><div class="bar-track"><div class="bar-fill" style="width:37%;background:#A0A87A"></div></div><div class="bar-pct">12.8%</div></div><div class="bar-row"><div class="bar-name" title="Десерты">Десерты</div><div class="bar-track"><div class="bar-fill" style="width:22%;background:#A0A87A"></div></div><div class="bar-pct">7.8%</div></div><div class="bar-row"><div class="bar-name" title="Супы">Супы</div><div class="bar-track"><div class="bar-fill" style="width:13%;background:#A0A87A"></div></div><div class="bar-pct">4.5%</div></div><div class="bar-row"><div class="bar-name" title="Пицца">Пицца</div><div class="bar-track"><div class="bar-fill" style="width:11%;background:#A0A87A"></div></div><div class="bar-pct">3.7%</div></div><div class="bar-row"><div class="bar-name" title="Доппио">Доппио</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#A0A87A"></div></div><div class="bar-pct">2.4%</div></div><div class="bar-row"><div class="bar-name" title="Хлеб">Хлеб</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#A0A87A"></div></div><div class="bar-pct">1.0%</div></div><div class="bar-row"><div class="bar-name" title="Гарниры">Гарниры</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#A0A87A"></div></div><div class="bar-pct">0.6%</div></div><div class="bar-row"><div class="bar-name" title="Мороженое">Мороженое</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#A0A87A"></div></div><div class="bar-pct">0.6%</div></div><div class="bar-row"><div class="bar-name" title="Плов">Плов</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#A0A87A"></div></div><div class="bar-pct">0.3%</div></div><div class="bar-row"><div class="bar-name" title="Детское меню">Детское меню</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#A0A87A"></div></div><div class="bar-pct">0.5%</div></div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Доля зон в выручке</div>
+      <div class="chart-wrap" style="height:220px"><canvas id="zoneChart" role="img" aria-label="Доля зон в выручке" width="491" height="275" style="display: block; box-sizing: border-box; height: 220px; width: 393px;"></canvas></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">Управленческий дашборд · Ресторан · Май 2026</div>
+
+<script>
+const barCats=[['Кофе',36.7],['Лимонад',21.3],['Чай',12.6],['Фреш',10.1],['Напитки',5.1],['Айс кофе',3.6],['доппио',3.6],['Витамин чай',2.4],['Матча',2.1],['Смузи детокс',1.4],['For kids',0.8],['Китайский чай',0.2]];
+const kuhCats=[['Основные блюда',34.7],['Завтраки',31.1],['Салаты',12.8],['Десерты',7.8],['Супы',4.5],['Пицца',3.7],['Доппио',2.4],['Хлеб',1.0],['Гарниры',0.6],['Мороженое',0.6],['Плов',0.3],['Детское меню',0.5]];
+
+function renderBars(data,color,id){
+  const max=data[0][1];
+  document.getElementById(id).innerHTML=data.map(([n,p])=>
+    '<div class="bar-row"><div class="bar-name" title="'+n+'">'+n+'</div><div class="bar-track"><div class="bar-fill" style="width:'+Math.round(p/max*100)+'%;background:'+color+'"></div></div><div class="bar-pct">'+p.toFixed(1)+'%</div></div>'
+  ).join('');
+}
+
+function showCat(type,el){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  renderBars(type==='bar'?barCats:kuhCats,type==='bar'?'#6B705C':'#A0A87A','catList');
+}
+
+renderBars(barCats,'#6B705C','catList');
+renderBars(barCats,'#6B705C','barList');
+renderBars(kuhCats,'#A0A87A','kuhList');
+
+const rev=[57461700,52523200,79117350,39241200,53249500,54089400,56877200,47444650,59199300,45925100,57243000,43970250,51831650,44255850,51121950,62255850,61886700,34787650,48741400,55900450,49396600,39155450,55948300,46110800,49881200,33346450,50084800,40518600,48950150,48306300,43141200];
+const apr=[47242300,55960000,48138500,56212700,60069500,47443600,40292250,35313000,51605200,47233000,53139500,58837200,44002100,51633400,41955850,32906200,40566200,54286750,59232400,44637400,41462200,44124950,46911150,55983700,73001250,63576800,40392250,45547680,48554500,46593800,0];
+
+new Chart(document.getElementById('lineChart'),{type:'line',data:{labels:Array.from({length:31},(_,i)=>i+1),datasets:[{label:'Май 2026',data:rev,borderColor:'#4A5240',backgroundColor:'rgba(107,112,92,0.08)',borderWidth:2,pointRadius:2,pointHoverRadius:5,fill:true,tension:0.3},{label:'Апрель 2026',data:apr,borderColor:'#C8BFA0',backgroundColor:'transparent',borderWidth:1.5,pointRadius:0,pointHoverRadius:4,borderDash:[4,3],tension:0.3}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+v.raw.toLocaleString('ru')+' сум'}}},scales:{x:{grid:{display:false},ticks:{font:{size:10},maxTicksLimit:10}},y:{display:false}}}});
+
+new Chart(document.getElementById('donutChart'),{type:'doughnut',data:{labels:['Бар','Кухня'],datasets:[{data:[26,74],backgroundColor:['#4A5240','#C8BFA0'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{display:false}}}});
+
+new Chart(document.getElementById('weekChart'),{type:'bar',data:{labels:['Пн','Вт','Ср','Чт','Пт','Сб','Вс'],datasets:[{data:[181153050,179307600,211906300,191048250,244133900,278232950,276181150],backgroundColor:['#C8BFA0','#C8BFA0','#8A9478','#8A9478','#6B705C','#4A5240','#4A5240'],borderRadius:4,borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>(v.raw/1000000).toFixed(0)+'M сум'}}},scales:{x:{grid:{display:false},ticks:{font:{size:11}}},y:{display:false}}}});
+
+new Chart(document.getElementById('zoneChart'),{type:'doughnut',data:{labels:['Зал','Летка','С собой','VIP-зал','Балкон'],datasets:[{data:[19.9,73.9,3.5,1.9,0.8],backgroundColor:['#8A9478','#4A5240','#C8BFA0','#B9A082','#D4C5A0'],borderWidth:2,borderColor:'#FFFFFF'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:10,padding:8}},tooltip:{callbacks:{label:v=>v.label+': '+v.raw+'%'}}}}});
+</script>
+
+
+</body></html>
