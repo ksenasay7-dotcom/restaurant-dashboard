@@ -207,7 +207,7 @@ async function loadData(){
 
   try {
     // Загружаем лист Данные (столбцы A=дата, B=день, C=выручка, D=чеки, E=ср.чек)
-    const data = await fetchSheet("'📋 Данные'!A4:E35");
+    const data = await fetchSheet("'Данные'!A4:E35");
 
     // Фильтруем строки с данными (исключаем итого)
     const rows = data.filter(r => r[0] && r[2] && r[0] !== 'Дата' && !isNaN(parseFloat(String(r[2]).replace(/\s/g,''))));
@@ -289,7 +289,7 @@ async function loadData(){
 
     // Загружаем зоны
     try {
-      const zonesData = await fetchSheet("'🗺 Зоны продаж'!B15:F20");
+      const zonesData = await fetchSheet("Зоны продаж'!B15:F20");
       const zoneNames = ['Зал','Летка','С собой','VIP-зал','Балкон'];
       let zonesHTML = '';
       let zoneRevs = [], zoneLabels = [];
@@ -315,7 +315,7 @@ async function loadData(){
 
     // Загружаем Бар и Кухня
     try {
-      const bkData = await fetchSheet("'🍽 Бар и Кухня'!B14:H30");
+      const bkData = await fetchSheet("'Бар и Кухня'!B14:H30");
       barCatsData = []; kuhCatsData = [];
       let barTotal = 0, kuhTotal = 0;
       bkData.forEach((r,i)=>{
